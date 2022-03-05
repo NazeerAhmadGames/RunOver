@@ -159,6 +159,8 @@ public class CrowdSystem : MonoBehaviour
         {
             AddCharacter(character);
         }
+
+        CalculateFirstRow();
     }
 
     private void ControlForLevelFail()

@@ -1,0 +1,23 @@
+fileFormatVersion: 2
+guid: 1416066bd7d994f57a90cdb27b94f217
+TrueTypeFontImporter:
+  externalObjects: {}
+  serializedVersion: 4
+  fontSize: 16
+  forceTextureCase: -2
+  characterSpacing: 0
+  characterPadding: 1
+  includeFontData: 1
+  fontName: Smack Laideth Down 2019
+  fontNames:
+  - Smack Laideth Down 2019
+  fallbackFontReferences:
+  - {fileID: 12800000, guid: f394565269f89416eaf856cece84745b, type: 3}
+  customCharacters: 
+  fontRenderingMode: 0
+  ascentCalculationMode: 1
+  useLegacyBoundsCalculation: 0
+  shouldRoundAdvanceValue: 1
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

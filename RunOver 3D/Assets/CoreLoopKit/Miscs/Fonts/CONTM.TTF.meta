@@ -1,0 +1,23 @@
+fileFormatVersion: 2
+guid: 8dcf7a6d9ae3346e38d47df5d76dde09
+TrueTypeFontImporter:
+  externalObjects: {}
+  serializedVersion: 4
+  fontSize: 16
+  forceTextureCase: -2
+  characterSpacing: 0
+  characterPadding: 1
+  includeFontData: 1
+  fontName: Continuum Medium
+  fontNames:
+  - Continuum Medium
+  fallbackFontReferences:
+  - {fileID: 12800000, guid: c1ea723f9ebe7644984e7d40eb7d1f0d, type: 3}
+  customCharacters: 
+  fontRenderingMode: 0
+  ascentCalculationMode: 1
+  useLegacyBoundsCalculation: 0
+  shouldRoundAdvanceValue: 1
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

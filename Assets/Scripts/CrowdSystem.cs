@@ -5,130 +5,168 @@ using UnityEngine;
 
 public class CrowdSystem : MonoBehaviour
 {
-    [SerializeField] private Transform characterToMove;
-    [SerializeField] private int crowdSizeToAdd;
-
-     private RowSystem[] allRows;
-     private List<Transform> charactersToMove=new List<Transform>();
-    private SwerveInputSystem swerveInputSystem;
-    private int totalRows,currentDestroyRowIndex;
-    
-    [SerializeField] private float horizontalSpeed,forwardSpeed,leftMoveFactor;
-
     public static CrowdSystem instance;
+    public RowSystem firstRow => rows[_firstRowIndex];
 
+
+    [SerializeField] private RowSystem rowSystemPrefab;
     private bool canMoveForward = true;
+    private List<TheCharacter> characters = new List<TheCharacter>();
+    public List<RowSystem> rows = new List<RowSystem>();
+    private int _firstRowIndex;
+    private float _reArrangeTimer = 0;
+    private bool rowsModified = false;
 
     private void Awake()
     {
         instance = this;
+        CalculateFirstRow();
     }
 
-    void Start()
+    public void RemoveCharacter(TheCharacter character, RowSystem charRow)
     {
-        swerveInputSystem = GetComponent<SwerveInputSystem>();
-        allRows = GetComponentsInChildren<RowSystem>();
-            StartCoroutine(delayedAddCrowd(crowdSizeToAdd));
-            totalRows = allRows.Length;
-
-    }
-    void OnEnable()
-    {
-        Application.targetFrameRate = 60;
-    }
-
-    void Update()
-    {
-       
-        FindGroupOfLeaders();
-        SwerveLeftRight();
-
-        if (canMoveForward)
+        if (characters.Contains(character))
         {
-            transform.position+=Vector3.forward*forwardSpeed*Time.deltaTime;
-        }
-
-        if (Input.GetKeyDown(KeyCode.A))
-        {
-            StartCoroutine(delayedAddCrowd(1));
+            charRow.RemoveChar(character);
+            characters.Remove(character);
+            _reArrangeTimer = 2;
+            rowsModified = true;
         }
     }
 
-    private void FindGroupOfLeaders()
+    public void AddCharacter(TheCharacter character)
     {
-        for (int i = 0; i < allRows.Length; i++)
+        characters.Add(character);
+        GetEmptyRow().AddChar(character);
+    }
+
+    public void Swerve(float movementX)
+    {
+        firstRow.transform.localPosition += new Vector3(movementX * Time.deltaTime, 0, 0);
+    }
+
+    public void ForwardMove(float speed)
+    {
+        foreach (var row in rows)
         {
-            if (allRows[i].transform.childCount > 0)
+            row.transform.position += new Vector3(0, 0, Time.deltaTime * speed);
+        }
+    }
+
+    private void Update()
+    {
+        UpdateRowPosses();
+        CalculateFirstRow();
+        if (rowsModified)
+        {
+            _reArrangeTimer -= Time.deltaTime;
+            if (_reArrangeTimer <= 0)
             {
-                if (charactersToMove.Count < allRows.Length)
-                {
-                    charactersToMove.Add(null);
-                }
-
-                charactersToMove[i] = (allRows[i].transform.GetChild(0));
+                rowsModified = false;
+                ReArrangeRows();
             }
         }
     }
 
-    private void SwerveLeftRight()
+    private void LateUpdate()
     {
-        if (charactersToMove.Count<=0)
+        ControlForLevelFail();
+    }
+
+    private RowSystem GetEmptyRow()
+    {
+        RowSystem emptyRow = null;
+        for (int i = 0; i < rows.Count; i++)
         {
-            return;
-        }
-        for (int i = 0; i < charactersToMove.Count; i++)
-        {
-           
-            Transform currentCharacterToMove = charactersToMove[i];
-            if (currentCharacterToMove==null)
+            if (!rows[i].AmIFull)
             {
+                emptyRow = rows[i];
+                break;
+            }
+        }
+
+        if (emptyRow == null)
+        {
+            RowSystem rs = Instantiate(rowSystemPrefab, transform);
+            rs.transform.position = rows[0].transform.position - new Vector3(0, 0, rows.Count);
+            rows.Add(rs);
+            emptyRow = rs;
+        }
+
+        return emptyRow;
+    }
+
+
+    private void UpdateRowPosses()
+    {
+        if (rows.Count == 0)
+            return;
+
+        for (int i = _firstRowIndex+1; i < rows.Count; i++)
+        {
+            Vector3 lpos = rows[i].transform.localPosition;
+            lpos.x = Mathf.Lerp(lpos.x, rows[i - 1].transform.localPosition.x, Time.deltaTime * 14f);
+            rows[i].transform.localPosition = lpos;
+        }
+    }
+
+    private void CalculateFirstRow()
+    {
+        for (int i = 0; i < rows.Count; i++)
+        {
+            if (rows[i].charcount > 0)
+            {
+                _firstRowIndex = i;
                 return;
             }
-            
-            float movementX = (swerveInputSystem.MoveFactorX * horizontalSpeed) * Time.deltaTime;
-
-            Vector3 newPos = currentCharacterToMove.position + new Vector3(movementX, 0, 0);
-            Vector2 currentClamping =
-                new Vector2(currentCharacterToMove.parent.GetComponent<RowSystem>().returnMaxLeft(),
-                    currentCharacterToMove.parent.GetComponent<RowSystem>().returnMaxRight());
-            currentCharacterToMove.position = new Vector3(Mathf.Clamp(newPos.x, -currentClamping.x, currentClamping.y),
-                currentCharacterToMove.position.y, currentCharacterToMove.position.z);
         }
+
+        _firstRowIndex = 0;
     }
 
-    IEnumerator delayedAddCrowd(int size)
+    private void ReArrangeRows()
     {
-        int currentlySpawned = 0;
-
-        for (int i = 0; i < size; i++)
+        while (rows.Count > 1)
         {
-            if (currentlySpawned<size)
+            if (rows[0].charcount == 0)
             {
-                foreach (RowSystem rs in allRows)
-                {
-                   yield return new WaitForSeconds(.01f);
-
-                   GameObject spawnedCharacter = Instantiate(rs.transform.GetChild(rs.transform.childCount-1).gameObject,rs.transform);
-                   spawnedCharacter.name = "Character " + "(" + i + ")";
-                   currentlySpawned++;
-
-                }
+                var destroyRow = rows[0].gameObject;
+                rows.RemoveAt(0);
+                Destroy(destroyRow);
+            }
+            else
+            {
+                break;
             }
         }
-    }
 
-    public void removeOneCharacter()
-    {
-        Destroy(allRows[currentDestroyRowIndex].transform.GetChild(allRows[currentDestroyRowIndex].transform.childCount-1).gameObject);
-        currentDestroyRowIndex++;
-        if (currentDestroyRowIndex>=totalRows)
+        foreach (var rowSystem in rows)
         {
-            currentDestroyRowIndex = 0;
+            rowSystem.ClearChars();
+        }
+
+        List<TheCharacter> charBuffer = new List<TheCharacter>();
+        foreach (var character in characters)
+        {
+            charBuffer.Add(character);
+        }
+        characters.Clear();
+        foreach (var character in charBuffer)
+        {
+            AddCharacter(character);
         }
     }
 
-    public void setIfCanMove(bool can)
+    private void ControlForLevelFail()
     {
-        canMoveForward = can;
+        foreach (var rowSystem in rows)
+        {
+            if (rowSystem.charcount>0)
+            {
+                return;
+                
+            }
+        }
+        PlayerController.instance.LevelEnd(true);
     }
 }

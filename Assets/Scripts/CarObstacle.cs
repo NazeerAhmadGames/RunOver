@@ -12,19 +12,7 @@ public class CarObstacle : MonoBehaviour
     [SerializeField] private Rigidbody[] allPieces;
     [SerializeField] private Vector3 explosionForceMin,explosionForceMax;
     [SerializeField] private GameObject explosion;
-    
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
+ 
     public void OnDestroyTheCar()
     {
         shatteredObject.transform.parent = null;

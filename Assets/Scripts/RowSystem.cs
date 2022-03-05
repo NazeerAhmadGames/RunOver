@@ -1,42 +1,37 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using DG.Tweening;
 using UnityEngine;
 
 public class RowSystem : MonoBehaviour
 {
-    [SerializeField] private float roadWidth;
+    public bool AmIFull => characters.Count >=nests.Length ;
+    public int charcount => characters.Count;
+    public Transform[] nests;
+    
+    private List<TheCharacter> characters = new List<TheCharacter>();
+    
 
-    private float maxRight, maxLeft,startingPos;
-    void Start()
+    public void AddChar(TheCharacter character)
     {
-
-        maxRight =roadWidth- transform.position.x;
-        maxLeft= roadWidth+transform.position.x;
+        Transform selectedNest = nests[characters.Count];
+        characters.Add(character);
+        character.transform.SetParent(selectedNest);
+        character.transform.DOLocalMove(Vector3.zero, 0.5f);
+        character.myRow = this;
     }
 
-    void Update()
+    public void RemoveChar(TheCharacter character)
     {
-        updateWhoFollowWho();
-    }
-
-    public void updateWhoFollowWho()
-    {
-        for (int i = 0; i < transform.childCount; i++)
+        if (characters.Contains(character))
         {
-            if (i>0)
-            {
-                transform.GetChild(i).GetComponent<TheCharacter>().setFollowTarget(transform.GetChild(i-1));
-            }
+            characters.Remove(character);  
         }
     }
 
-    public float returnMaxLeft()
+
+    public void ClearChars()
     {
-        return maxLeft;
+        characters.Clear();
     }
-    public float returnMaxRight()
-    {
-        return maxRight;
-    }
-    
 }

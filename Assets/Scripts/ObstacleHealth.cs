@@ -15,13 +15,7 @@ public class ObstacleHealth : MonoBehaviour
     {
         displayHp();
     }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
+ 
     public void reduceHealth()
     {
         if (hp>0)

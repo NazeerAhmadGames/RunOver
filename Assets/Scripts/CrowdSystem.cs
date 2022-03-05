@@ -7,7 +7,7 @@ public class CrowdSystem : MonoBehaviour
 {
     public static CrowdSystem instance;
     public RowSystem firstRow => rows[_firstRowIndex];
-
+    [SerializeField] private float leftRightMoveFactor;
 
     [SerializeField] private RowSystem rowSystemPrefab;
     private bool canMoveForward = true;
@@ -42,7 +42,11 @@ public class CrowdSystem : MonoBehaviour
 
     public void Swerve(float movementX)
     {
-        firstRow.transform.localPosition += new Vector3(movementX * Time.deltaTime, 0, 0);
+      //  firstRow.transform.localPosition += new Vector3(movementX, 0, 0);
+        Vector3 newPos  = firstRow.transform.position+new Vector3( movementX, 0, 0);
+           
+        firstRow.transform.position = new Vector3(Mathf.Clamp(newPos.x, -leftRightMoveFactor, leftRightMoveFactor),
+            firstRow.transform.position.y,      firstRow.transform.position.z );
     }
 
     public void ForwardMove(float speed)

@@ -32,7 +32,7 @@ public class PlayerController : MonoBehaviour
     private void Update()
     {
   
-        crowdSystem.Swerve((swerveInputSystem.MoveFactorX * horizontalSpeed));
+        crowdSystem.Swerve((swerveInputSystem.MoveFactorX * horizontalSpeed*Time.deltaTime));
         crowdSystem.ForwardMove(forwardSpeed); 
 
         if (Input.GetKeyDown(KeyCode.S))

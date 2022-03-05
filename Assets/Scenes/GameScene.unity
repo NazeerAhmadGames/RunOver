@@ -48819,6 +48819,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: eba47c12f9dff44f6ab33ab5da993ab2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  leftRightMoveFactor: 7
   rowSystemPrefab: {fileID: 1204656180351788315, guid: 51ceed5db08edcc4185e24ffe4e764a5,
     type: 3}
   rows:

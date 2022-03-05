@@ -29,7 +29,7 @@ public class CrowdSystem : MonoBehaviour
         {
             charRow.RemoveChar(character);
             characters.Remove(character);
-            _reArrangeTimer = 2;
+            _reArrangeTimer = 1;
             rowsModified = true;
         }
     }

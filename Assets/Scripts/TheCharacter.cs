@@ -7,10 +7,11 @@ using UnityEngine.Events;
 public class TheCharacter : MonoBehaviour
 {
 
-    public RowSystem myRow;
+   [HideInInspector] public RowSystem myRow;
     [SerializeField] private float followSpeed=30;
     [SerializeField] private Vector3 offset;
-    [SerializeField] private Transform targetToFollow;
+    [SerializeField] private GameObject killVfx;
+    private Transform targetToFollow;
     
     private bool isDead;
     
@@ -19,6 +20,8 @@ public class TheCharacter : MonoBehaviour
         if (isDead==false)
         {
             isDead = true;  
+            killVfx.transform.parent = null;
+            killVfx.SetActive(true);
             Destroy(gameObject);
         }
     }

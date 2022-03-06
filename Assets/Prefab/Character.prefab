@@ -135,7 +135,7 @@ SkinnedMeshRenderer:
   - 0
   - 100
   - 100
-  - 100
+  - 0
   - 0
   m_RootBone: {fileID: 304349628411133774}
   m_AABB:
@@ -551,6 +551,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c269f5b67eb4a42b6a9c7b9baa6edd0e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  myRow: {fileID: 0}
   followSpeed: 20
   offset: {x: 0, y: 0, z: 1.25}
   targetToFollow: {fileID: 0}

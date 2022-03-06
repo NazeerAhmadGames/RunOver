@@ -7,6 +7,7 @@ public class CrowdSystem : MonoBehaviour
 {
     public static CrowdSystem instance;
     public RowSystem firstRow => rows[_firstRowIndex];
+    public float snakeAlikeFactor=25;
     [SerializeField] private float leftRightMoveFactor;
 
     [SerializeField] private RowSystem rowSystemPrefab;
@@ -109,7 +110,7 @@ public class CrowdSystem : MonoBehaviour
         for (int i = _firstRowIndex+1; i < rows.Count; i++)
         {
             Vector3 lpos = rows[i].transform.localPosition;
-            lpos.x = Mathf.Lerp(lpos.x, rows[i - 1].transform.localPosition.x, Time.deltaTime * 14f);
+            lpos.x = Mathf.Lerp(lpos.x, rows[i - 1].transform.localPosition.x, Time.deltaTime * snakeAlikeFactor);
             rows[i].transform.localPosition = lpos;
         }
     }

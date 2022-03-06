@@ -22,9 +22,11 @@ public class CameraFollowCharacter : MonoBehaviour
     void Update()
     {
 
-        Vector3 newpos = PlayerController.instance.camFollowTarget.position - offset;
+        Vector3 newpos = new Vector3(transform.position.x, PlayerController.instance.camFollowTarget.position.y,
+            PlayerController.instance.camFollowTarget.position.z) - offset;
         if (newpos.z > targetPos.z)
             targetPos = newpos;
         transform.position = Vector3.Lerp(transform.position,targetPos , followSpeed * Time.deltaTime);
+        
     }
 }

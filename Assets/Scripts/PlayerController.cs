@@ -11,11 +11,13 @@ public class PlayerController : MonoBehaviour
     public Transform camFollowTarget => crowdSystem.firstRow.transform;
     [SerializeField] private float horizontalSpeed, forwardSpeed;
     private SwerveInputSystem swerveInputSystem;
+    [SerializeField] private GameObject dummyCharacter;
 
     private void Awake()
     {
         instance = this;
         swerveInputSystem = GetComponent<SwerveInputSystem>();
+        dummyCharacter.SetActive(false);
  
     }
 
@@ -37,12 +39,17 @@ public class PlayerController : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.S))
         {
-            for (int i = 0; i < 10; i++)
-            {
-                TheCharacter ch = Instantiate(charPrefab, crowdSystem.rows[0].transform.position, Quaternion.identity);
+            addMoreCharacters(10);
+        }
+    }
+
+    public void addMoreCharacters(int number)
+    {
+        for (int i = 0; i < number; i++)
+        {
+            TheCharacter ch = Instantiate(charPrefab, crowdSystem.rows[0].transform.position, Quaternion.identity);
                 
-                AddCharacter(ch);
-            }
+            AddCharacter(ch);
         }
     }
 

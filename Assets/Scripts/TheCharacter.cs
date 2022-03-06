@@ -22,6 +22,7 @@ public class TheCharacter : MonoBehaviour
             isDead = true;  
             killVfx.transform.parent = null;
             killVfx.SetActive(true);
+            Destroy(killVfx,2);
             Destroy(gameObject);
         }
     }

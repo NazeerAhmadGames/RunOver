@@ -17,7 +17,7 @@ public class TheChunk : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (transform.position.z<cam.transform.position.z &&!isRepooled)
+        if (transform.position.z<cam.transform.position.z-20 &&!isRepooled)
         {
             isRepooled = true;
             EnvironmentPooling.instance.repoolNow(transform);

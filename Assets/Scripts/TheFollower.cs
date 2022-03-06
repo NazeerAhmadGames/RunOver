@@ -6,6 +6,7 @@ using UnityEngine;
 public class TheFollower : MonoBehaviour
 {
     private bool hasJoined;
+    [SerializeField] private GameObject vfxOnJoining;
     void Start()
     {
         
@@ -22,7 +23,10 @@ public class TheFollower : MonoBehaviour
         {
             hasJoined = true;
             PlayerController.instance.addMoreCharacters(1);
-          Destroy( gameObject); 
+            vfxOnJoining.transform.parent = null;
+            vfxOnJoining.SetActive(true);
+            Destroy(vfxOnJoining,2);
+            Destroy( gameObject); 
         }
     }
 }

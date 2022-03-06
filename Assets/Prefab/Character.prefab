@@ -4877,7 +4877,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   destroyWhenDone: 1
-  pitchRandomMultiplier: 0.5
+  pitchRandomMultiplier: 2
 --- !u!82 &3586300716828726560
 AudioSource:
   m_ObjectHideFlags: 0
@@ -4888,9 +4888,9 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: 76f966d23eb64410ea2fb226d6623e71, type: 3}
+  m_audioClip: {fileID: 8300000, guid: 3461b31d644e79c46a4e162d1201dd8c, type: 3}
   m_PlayOnAwake: 1
-  m_Volume: 1
+  m_Volume: 0.624
   m_Pitch: 1
   Loop: 0
   Mute: 0

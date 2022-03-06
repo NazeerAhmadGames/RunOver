@@ -319,8 +319,8 @@ ParticleSystem:
     startSize:
       serializedVersion: 2
       minMaxState: 3
-      scalar: 1
-      minScalar: 0.6
+      scalar: 0.8
+      minScalar: 0.4
       maxCurve:
         serializedVersion: 2
         m_Curve:
@@ -4876,7 +4876,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1ac4cd7428560458a9a2a89792f76aec, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  destroyWhenDone: 1
+  destroyWhenDone: 0
   pitchRandomMultiplier: 2
 --- !u!82 &3586300716828726560
 AudioSource:

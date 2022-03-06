@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using DG.Tweening;
 using UnityEngine;
-
+using UnityEngine.Events;
 
 
 public class CarObstacle : MonoBehaviour
@@ -12,9 +12,12 @@ public class CarObstacle : MonoBehaviour
     [SerializeField] private Rigidbody[] allPieces;
     [SerializeField] private Vector3 explosionForceMin,explosionForceMax;
     [SerializeField] private GameObject explosion;
+
+    public UnityEvent onDeath;
  
     public void OnDestroyTheCar()
     {
+     
         shatteredObject.transform.parent = null;
         shatteredObject.SetActive(true);
         
@@ -29,7 +32,7 @@ public class CarObstacle : MonoBehaviour
 
                 rb.transform.DOScale(Vector3.one / 10, .6f).SetDelay(1.5f);
         }
-
+        onDeath.Invoke();
         Destroy(shatteredObject,3);
         Destroy(gameObject);
     }

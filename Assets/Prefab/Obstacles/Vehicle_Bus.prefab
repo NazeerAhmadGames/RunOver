@@ -309,6 +309,9 @@ MonoBehaviour:
   explosionForceMin: {x: -40, y: 20, z: 30}
   explosionForceMax: {x: 40, y: 40, z: 50}
   explosion: {fileID: 4799626493693285427}
+  onDeath:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!114 &422120885905823217
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -34337,13 +34340,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5431509027135103555}
-  m_LocalRotation: {x: -0, y: 1, z: -0, w: 0}
+  m_LocalRotation: {x: 0, y: -1, z: 0, w: 0}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 2, y: 2, z: 2}
   m_Children: []
   m_Father: {fileID: 3711235943586752510}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: -180, z: 0}
 --- !u!33 &1423100174660675457
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -34632,7 +34635,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6348666152466973475}
-  m_LocalRotation: {x: -0, y: 1, z: -0, w: 0}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 2, y: 2, z: 2}
   m_Children:
@@ -35431,7 +35434,7 @@ PrefabInstance:
     - target: {fileID: 8158514776246229859, guid: 70897440e815a43aeb068801c6c1f5e5,
         type: 3}
       propertyPath: hp
-      value: 20
+      value: 40
       objectReference: {fileID: 0}
     - target: {fileID: 8158514776246229859, guid: 70897440e815a43aeb068801c6c1f5e5,
         type: 3}
@@ -35476,7 +35479,7 @@ PrefabInstance:
     - target: {fileID: 8158514777362061817, guid: 70897440e815a43aeb068801c6c1f5e5,
         type: 3}
       propertyPath: m_text
-      value: 20
+      value: 40
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 70897440e815a43aeb068801c6c1f5e5, type: 3}

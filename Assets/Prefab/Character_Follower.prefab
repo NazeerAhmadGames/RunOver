@@ -1049,6 +1049,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   vfxOnJoining: {fileID: 8148300362285766500}
+  myAnim: {fileID: 3138124317931710105}
+  distanceBeforeStartRunning: 20
+  runAwaySpeed: 4
 --- !u!54 &2042805911504008188
 Rigidbody:
   m_ObjectHideFlags: 0

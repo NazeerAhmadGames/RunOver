@@ -21,9 +21,12 @@ public class LevelGen : MonoBehaviour
     {
         for (int i = 0; i < noToSpawn; i++)
         {
+          
             GameObject spawnedChunk = Instantiate(chunk);
             spawnedChunk.transform.position = new Vector3(0, 0, lastPos + spawnedChunk.GetComponent<TheLevelChunk>().returnTheSize().z);
             lastPos = spawnedChunk.transform.position.z;
+            spawnedChunk.GetComponent<TheLevelChunk>().setIfIsFirstChunk(false);
+            spawnedChunk.GetComponent<TheLevelChunk>().spawnFollowers();
         }
       
     }

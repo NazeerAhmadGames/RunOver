@@ -64,7 +64,7 @@ public class PlayerController : MonoBehaviour
         {
             enabled = false;
             crowdSystem.enabled = false;
-            Debug.Log("LEVEL FAILED");
+          CoreLoopUi.instance.onLoosingGame();
 
         }
     }

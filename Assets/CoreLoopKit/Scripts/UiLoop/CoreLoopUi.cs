@@ -66,7 +66,7 @@ public class CoreLoopUi : MonoBehaviour
 
     IEnumerator looseSequence()
     {
-        yield return new WaitForSeconds(1.5f);
+        yield return new WaitForSeconds(.75f);
         deathPanel.SetActive(true);
         hudCanvas.gameObject.SetActive(false);
         HapticManager.instance.playTheSoftHaptics();

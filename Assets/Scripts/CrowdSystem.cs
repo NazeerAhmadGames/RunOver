@@ -93,7 +93,7 @@ public class CrowdSystem : MonoBehaviour
         if (emptyRow == null)
         {
             RowSystem rs = Instantiate(rowSystemPrefab, transform);
-            rs.transform.position = rows[0].transform.position - new Vector3(0, 0, rows.Count);
+            rs.transform.position = rows[0].transform.position - new Vector3(0, 0, rows.Count*2);
             rows.Add(rs);
             emptyRow = rs;
         }

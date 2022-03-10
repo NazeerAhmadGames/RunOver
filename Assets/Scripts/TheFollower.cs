@@ -11,9 +11,17 @@ public class TheFollower : MonoBehaviour
     [SerializeField] private float distanceBeforeStartRunning=20;
     [SerializeField] private float runAwaySpeed=2;
     private bool isrunning;
+    private Transform cam;
+    private bool isOffScreen;
     void OnEnable()
     {
         StartCoroutine(delayedCheckForPlayer());
+    }
+
+    private void Start()
+    {
+        cam=Camera.main.transform;
+
     }
 
     void Update()
@@ -22,6 +30,12 @@ public class TheFollower : MonoBehaviour
         {
             transform.position+=transform.forward
             *runAwaySpeed * Time.deltaTime;
+        }
+        
+        if (transform.position.z<cam.transform.position.z-20 &&!isOffScreen)
+        {
+            isOffScreen = true;
+            Destroy(gameObject);
         }
     }
 

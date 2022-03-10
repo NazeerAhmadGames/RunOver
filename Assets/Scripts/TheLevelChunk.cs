@@ -37,15 +37,21 @@ public class TheLevelChunk : MonoBehaviour
         for (int i = 0; i < numberOfFollowers; i++)
         {
             Vector3 randomPos = generateRandomVectorOnChunk();
-            if (isFeasiblePosition(randomPos))
+
+            for (int j = 0; j < 5; j++)
             {
-                GameObject spawnedFollower = Instantiate(followerPrefab, transform);
-                spawnedFollower.transform.position = randomPos;
-                spawnedFollower.transform.eulerAngles = new Vector3(0, UnityEngine.Random.Range(-360, 360), 0);
-            }
-            else
-            {
-                i--;
+
+                if (isFeasiblePosition(randomPos))
+                {
+                    GameObject spawnedFollower = Instantiate(followerPrefab, transform);
+                    spawnedFollower.transform.position = randomPos;
+                    spawnedFollower.transform.eulerAngles = new Vector3(0, UnityEngine.Random.Range(-360, 360), 0);
+                    randomPos = generateRandomVectorInGroup(spawnedFollower.transform.position);
+                }
+                else
+                {
+                    i--;
+                }    
             }
         
         }
@@ -64,7 +70,12 @@ public class TheLevelChunk : MonoBehaviour
     public Vector3 generateRandomVectorOnChunk()
     {
         return new Vector3(UnityEngine.Random.Range(-chunkSize.x/2, chunkSize.x/2),
-            0.61f, UnityEngine.Random.Range(transform.position.z,transform.position.z+ chunkSize.z));
+            0.61f, UnityEngine.Random.Range(transform.position.z+20,transform.position.z+ chunkSize.z-20));
+    }
+    public Vector3 generateRandomVectorInGroup(Vector3 lastFollower,float offset=5)
+    {
+        return new Vector3(UnityEngine.Random.Range(lastFollower.x+offset, lastFollower.x-offset),
+            0.61f, UnityEngine.Random.Range(lastFollower.z+offset,lastFollower.z-offset));
     }
     private void OnDrawGizmos()
     {

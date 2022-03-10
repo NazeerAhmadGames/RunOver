@@ -34,6 +34,8 @@ public class CarObstacle : MonoBehaviour
         }
         onDeath.Invoke();
         Destroy(shatteredObject,3);
+        HapticManager.instance.playTheLightHaptics();
+
         Destroy(gameObject);
     }
 }

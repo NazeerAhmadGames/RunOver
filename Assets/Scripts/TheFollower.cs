@@ -67,6 +67,8 @@ public class TheFollower : MonoBehaviour
             vfxOnJoining.transform.parent = null;
             vfxOnJoining.SetActive(true);
             Destroy(vfxOnJoining,2);
+            HapticManager.instance.playTheLightHaptics();
+
             Destroy( gameObject); 
         }
     }

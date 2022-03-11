@@ -10,7 +10,7 @@ public class TheFollower : MonoBehaviour
     [SerializeField] private Animator myAnim;
     [SerializeField] private float distanceBeforeStartRunning=20;
     [SerializeField] private float runAwaySpeed=2;
-    private bool isrunning;
+    private bool isrunning,isDead;
     private Transform cam;
     private bool isOffScreen;
     void OnEnable()
@@ -69,6 +69,18 @@ public class TheFollower : MonoBehaviour
             Destroy(vfxOnJoining,2);
             HapticManager.instance.playTheLightHaptics();
 
+            Destroy( gameObject); 
+        }
+        
+        if (col.gameObject.GetComponentInParent<TheObstacle>()&& !isDead)
+        {
+            isDead = true;
+         /*
+            vfxOnJoining.transform.parent = null;
+            vfxOnJoining.SetActive(true);
+            Destroy(vfxOnJoining,2);
+            HapticManager.instance.playTheLightHaptics();
+*/
             Destroy( gameObject); 
         }
     }

@@ -29,6 +29,8 @@ public class LevelGen : MonoBehaviour
             spawnedChunk.GetComponent<TheLevelChunk>().spawnVehicle();
             spawnedChunk.GetComponent<TheLevelChunk>().spawnFollowers();
 
+            spawnedChunk.GetComponent<TheLevelChunk>().spawnTraps();
+
         }
       
     }

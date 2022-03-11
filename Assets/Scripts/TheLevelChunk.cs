@@ -11,6 +11,7 @@ public class TheLevelChunk : MonoBehaviour
     [SerializeField] private float[] spawnPositions;
     [SerializeField] private GameObject followerPrefab;
     [SerializeField] private GameObject[] allVehicles;
+    [SerializeField] private GameObject[] allTraps;
     [SerializeField] private bool isFirstChunk = true;
     [SerializeField] private Transform vehicleHolder;
     [SerializeField] private int minObstacleHealth=15;
@@ -94,6 +95,23 @@ public class TheLevelChunk : MonoBehaviour
             }
         
         }
+    }
+    public void spawnTraps()
+    {
+        if (PlayerPrefs.GetInt("CURRENTLEVEL") < 2)
+        {
+          //  return;
+            
+        }
+            Vector3 randomPos = generateRandomVectorOnChunk();
+
+
+                if (isFeasiblePosition(randomPos))
+                {
+                    GameObject spawnedTrap = Instantiate(allTraps[UnityEngine.Random.Range(0,allTraps.Length)], transform);
+                    spawnedTrap.transform.position = randomPos;
+                }
+       
     }
 
     private void Start()

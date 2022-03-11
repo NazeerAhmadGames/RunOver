@@ -182,6 +182,7 @@ MonoBehaviour:
   explosionForceMin: {x: -40, y: 20, z: 30}
   explosionForceMax: {x: 40, y: 40, z: 50}
   explosion: {fileID: 4799626493693285427}
+  index: 2
   onDeath:
     m_PersistentCalls:
       m_Calls: []

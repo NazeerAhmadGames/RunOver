@@ -12,9 +12,15 @@ public class CarObstacle : MonoBehaviour
     [SerializeField] private Rigidbody[] allPieces;
     [SerializeField] private Vector3 explosionForceMin,explosionForceMax;
     [SerializeField] private GameObject explosion;
-
+    [SerializeField] private int index;
     public UnityEvent onDeath;
- 
+    private ObstacleHealth hp;
+
+    private void OnEnable()
+    {
+        hp = GetComponentInChildren<ObstacleHealth>();
+    }
+
     public void OnDestroyTheCar()
     {
      
@@ -37,5 +43,15 @@ public class CarObstacle : MonoBehaviour
         HapticManager.instance.playTheLightHaptics();
 
         Destroy(gameObject);
+    }
+
+    public int returnTheTypeOfCar()
+    {
+        return index;
+    }
+
+    public void updateHp(int newHp)
+    {
+        hp.setNewHp(newHp);
     }
 }

@@ -26,7 +26,9 @@ public class LevelGen : MonoBehaviour
             spawnedChunk.transform.position = new Vector3(0, 0, lastPos + spawnedChunk.GetComponent<TheLevelChunk>().returnTheSize().z);
             lastPos = spawnedChunk.transform.position.z;
             spawnedChunk.GetComponent<TheLevelChunk>().setIfIsFirstChunk(false);
+            spawnedChunk.GetComponent<TheLevelChunk>().spawnVehicle();
             spawnedChunk.GetComponent<TheLevelChunk>().spawnFollowers();
+
         }
       
     }

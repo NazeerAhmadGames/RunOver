@@ -28,6 +28,11 @@ public class ObstacleHealth : MonoBehaviour
         }
         displayHp();
     }
+    public void setNewHp(int i)
+    {
+        hp = i;
+        displayHp();
+    }
 
     private void OnDrawGizmos()
     {

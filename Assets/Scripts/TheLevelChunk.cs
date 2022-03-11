@@ -8,13 +8,21 @@ public class TheLevelChunk : MonoBehaviour
 {
     [SerializeField] private Vector3 chunkSize;
     [SerializeField] private int numberOfFollowers;
+    [SerializeField] private float[] spawnPositions;
     [SerializeField] private GameObject followerPrefab;
+    [SerializeField] private GameObject[] allVehicles;
     [SerializeField] private bool isFirstChunk = true;
+    [SerializeField] private Transform vehicleHolder;
+    [SerializeField] private int minObstacleHealth=15;
+
+    private int randomMaxHp;
     void OnEnable()
     {
         if (isFirstChunk)
         {
+            spawnVehicle();
             spawnFollowers();
+
         }
     }
 
@@ -23,17 +31,48 @@ public class TheLevelChunk : MonoBehaviour
         isFirst = isFirst;
         if (!isFirst)
         {
+           
             foreach (TheFollower f in GetComponentsInChildren<TheFollower>())
             {
                 Destroy(f.gameObject);
             }
+          
+            foreach (CarObstacle c in GetComponentsInChildren<CarObstacle>())
+            {
+                Destroy(c.gameObject);
+            }
         }
     }
-    
-    
+
+    public void spawnVehicle()
+    {
+        for (int i = 0; i < 3; i++)
+        {
+            randomMaxHp = UnityEngine.Random.Range(minObstacleHealth, minObstacleHealth * i + 1);
+            GameObject spawnedVehicle = Instantiate( returnVehicleWithIndex(i), transform);
+            spawnedVehicle.transform.position = vehicleHolder.transform.position+new Vector3(spawnPositions[i],0,0);
+            spawnedVehicle.GetComponent<CarObstacle>().updateHp(randomMaxHp);
+        }
+    }
+
+    public GameObject returnVehicleWithIndex(int index)
+    {
+        for (int i = 0; i < 10000; i++)
+        {
+            GameObject randomObj = allVehicles[UnityEngine.Random.Range(0, allVehicles.Length)];
+            if (randomObj.GetComponent<CarObstacle>().returnTheTypeOfCar()==index)
+            {
+                return randomObj;
+            }
+           
+        }
+
+        return null;
+    }
 
     public void spawnFollowers()
     {
+        numberOfFollowers = (randomMaxHp+10)/5;
         for (int i = 0; i < numberOfFollowers; i++)
         {
             Vector3 randomPos = generateRandomVectorOnChunk();

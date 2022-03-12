@@ -32,6 +32,7 @@ public class EndingTile : MonoBehaviour
         {
             hasActivated = true;
             meshRenderer.material = landedOnMat;
+            EndingCar.instance.updateCurrentBonusAmount(amount);
         }
     }
 

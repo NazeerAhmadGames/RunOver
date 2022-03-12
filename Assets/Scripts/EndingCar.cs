@@ -10,13 +10,36 @@ public class EndingCar : MonoBehaviour
     [SerializeField] private Rigidbody rb;
     [SerializeField] private Vector3 forceVector,torqueVector;
     [SerializeField] private GameObject hitVFx;
-    void Start()
+
+    private int bonusAmount;
+    private bool velocityCheckCoolDown;
+
+
+    public static EndingCar instance;
+    private bool hasStopped;
+    void Awake()
     {
-        
+        instance = this;
     }
-    void Update()
+    void FixedUpdate()
     {
-        
+        if (hasKicked)
+        {
+            if (rb.velocity.magnitude<3 &&velocityCheckCoolDown &&!hasStopped)
+            {
+                hasStopped = true;
+                CoreLoopUi.instance.onWinningGame();
+                CameraFollowCharacter.instance.showConfetti();
+                DiamondRewardSystem.instance.setTheDiamondsAmount_EndGame(bonusAmount);
+            }
+        }
+    }
+
+    IEnumerator checkForVelocityDelay()
+    {
+        yield return new WaitForSeconds(1);
+        velocityCheckCoolDown = true;
+
     }
     private void OnTriggerEnter(Collider col)
     {
@@ -45,10 +68,16 @@ public class EndingCar : MonoBehaviour
         yield return new WaitForSeconds(.2f);
         CameraFollowCharacter.instance.followFlyingEndingObject(transform);
         rb.isKinematic = false;
-        print("total giant Count was "+ EndingGiant.instance.returnTheTotalCount());
         forceVector = new Vector3(forceVector.x, forceVector.y,
             forceVector.z * EndingGiant.instance.returnTheTotalCount());
         rb.AddForce(forceVector,ForceMode.Impulse);
         rb.AddTorque(torqueVector,ForceMode.Impulse);
+
+        StartCoroutine(checkForVelocityDelay());
+    }
+
+    public void updateCurrentBonusAmount(int value)
+    {
+        bonusAmount = value;
     }
 }

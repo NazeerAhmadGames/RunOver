@@ -7,7 +7,7 @@ using UnityEngine.TestTools;
 public class CameraFollowCharacter : MonoBehaviour
 {
     [SerializeField] private Transform target;
-
+    [SerializeField] private GameObject confetti;
     [SerializeField] private float followSpeed;
 
     private Vector3 offset;
@@ -61,5 +61,11 @@ public class CameraFollowCharacter : MonoBehaviour
         target = t;
         canFollowEndingObject = true;
 
+    }
+
+    public void showConfetti()
+    {
+        confetti.SetActive(true);
+        Destroy(confetti,2);
     }
 }

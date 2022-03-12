@@ -42,13 +42,12 @@ public class CoreLoopUi : MonoBehaviour
 
     IEnumerator winSequence()
     {
-        yield return new WaitForSeconds(1f);
+        yield return new WaitForSeconds(1.5f);
         WinPanel.SetActive(true);
         hudCanvas.gameObject.SetActive(false);
-        //  LevelingSystem.instance.UpdatePlayerPRefs();
-          FlipsUiManager.instance.onCompletingLevel();
+         LevelingSystem.instance.UpdatePlayerPRefs();
+         // FlipsUiManager.instance.onCompletingLevel();
      //TinySauce.OnGameFinished(true, 0, "Level" + PlayerPrefs.GetInt("CURRENTLEVEL"));
-        DiamondRewardSystem.instance.setTheDiamondsAmount_EndGame();
         HapticManager.instance.playTheSoftHaptics();
         hudCanvas.gameObject.SetActive(false);
     }

@@ -7,8 +7,8 @@ using UnityEngine.UI;
 
 public class DiamondRewardSystem : MonoBehaviour
 {
-    [SerializeField] private GameObject flyingDiamond,panel,nextButton,restartButton;
-    [SerializeField] private TextMeshProUGUI diamondCollectedText,totalDiamondsText;
+    [SerializeField] private GameObject flyingDiamond,panel,nextButton;
+    [SerializeField] private Text diamondCollectedText,totalDiamondsText;
     [SerializeField] private float coinMin, coinMax;
     private int InGameDiamondAmount=0;
     private int diamonds,multiplyer;
@@ -32,7 +32,7 @@ public class DiamondRewardSystem : MonoBehaviour
         HapticManager.instance.playTheSoftHaptics();
         panel.SetActive(false);
         nextButton.SetActive(false);
-        restartButton.SetActive(false);
+     //   restartButton.SetActive(false);
 
         int amountToSpawn = amount+InGameDiamondAmount;
         InGameDiamondAmount = 0;
@@ -53,7 +53,7 @@ public class DiamondRewardSystem : MonoBehaviour
 
     public int returnTheDiamonds()
     {
-        return multiplyer;
+        return diamonds;
 
     }
     public void setTheMultiplierFactor(int amount)
@@ -67,16 +67,10 @@ public class DiamondRewardSystem : MonoBehaviour
         return multiplyer;
 
     }
-
-    public void AddIngameDiamond(int amount)
+    public void setTheDiamondsAmount_EndGame(int amount)
     {
-        InGameDiamondAmount += amount;
-        diamondCollectedText.text = "+" + (InGameDiamondAmount + diamonds);
-        SpawnIngameDiamond();
-    }
-    public void setTheDiamondsAmount_EndGame()
-    {
-        diamondCollectedText.text = "+" + returnTheDiamonds();
+        diamonds += amount;
+        diamondCollectedText.text = "+" +  + diamonds;
     }
 
     private void FixedUpdate()

@@ -127,7 +127,7 @@ public class TheLevelChunk : MonoBehaviour
     public Vector3 generateRandomVectorOnChunk()
     {
         return new Vector3(UnityEngine.Random.Range(-chunkSize.x/2, chunkSize.x/2),
-            0.61f, UnityEngine.Random.Range(transform.position.z+20,transform.position.z+ chunkSize.z-20));
+            0.61f, UnityEngine.Random.Range(transform.position.z+10,transform.position.z+ chunkSize.z-30));
     }
     public Vector3 generateRandomVectorInGroup(Vector3 lastFollower,float offset=5)
     {

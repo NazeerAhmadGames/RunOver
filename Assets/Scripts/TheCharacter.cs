@@ -12,8 +12,11 @@ public class TheCharacter : MonoBehaviour
     [SerializeField] private Vector3 offset;
     [SerializeField] private GameObject killVfx;
     private Transform targetToFollow;
+
+    private Transform giantLeader;
     
-    private bool isDead;
+    private bool isDead,hasMerged,isGiantLeader;
+    
     
     public void onBeingKilled()
     {
@@ -31,4 +34,40 @@ public class TheCharacter : MonoBehaviour
     {
         CrowdSystem.instance.RemoveCharacter(this,myRow);
     }
+
+    private void Update()
+    {
+        if (giantLeader!=null)
+        {
+            moveTowardsGiant();
+        }
+      
+    }
+
+    public void moveTowardsGiant()
+    {
+        transform.position =
+            Vector3.Lerp(transform.position, giantLeader.transform.position, followSpeed * Time.deltaTime);
+
+        if (Vector3.Distance(transform.position,giantLeader.transform.position)<=.2f&&!hasMerged)
+        {
+            hasMerged = true;
+            EndingGiant.instance.increaseGiantSize();
+            Destroy(gameObject);
+        }
+    }
+
+    public void mergeIntoGiant(TheCharacter leader)
+    {
+        if (!isGiantLeader)
+        {
+            giantLeader = leader.transform;
+        }
+    }
+
+    public void setMeAsGiantLeader(bool isLeader)
+    {
+        isGiantLeader = isLeader;
+    }
+    
 }

@@ -13,6 +13,8 @@ public class PlayerController : MonoBehaviour
     private SwerveInputSystem swerveInputSystem;
     [SerializeField] private GameObject dummyCharacter;
 
+    private bool canMove=true;
+
     private void Awake()
     {
         instance = this;
@@ -34,8 +36,12 @@ public class PlayerController : MonoBehaviour
     private void Update()
     {
   
-        crowdSystem.Swerve((swerveInputSystem.MoveFactorX * horizontalSpeed*Time.deltaTime));
-        crowdSystem.ForwardMove(forwardSpeed); 
+        if (canMove)
+        {
+            crowdSystem.ForwardMove(forwardSpeed); 
+            crowdSystem.Swerve((swerveInputSystem.MoveFactorX * horizontalSpeed*Time.deltaTime));
+        }
+      
 
         if (Input.GetKeyDown(KeyCode.S))
         {
@@ -67,5 +73,10 @@ public class PlayerController : MonoBehaviour
           CoreLoopUi.instance.onLoosingGame();
 
         }
+    }
+
+    public void setIfCanMove(bool can)
+    {
+        canMove = can;
     }
 }

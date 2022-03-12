@@ -63,7 +63,18 @@ public class TheFollower : MonoBehaviour
         if (col.gameObject.GetComponent<TheCharacter>() && !hasJoined)
         {
             hasJoined = true;
-            PlayerController.instance.addMoreCharacters(1);
+
+            if (FinishLine.instance.returnIfCrossed()==false)
+            {
+                PlayerController.instance.addMoreCharacters(1);
+
+            }
+
+            else
+            {
+                EndingGiant.instance.increaseGiantSize();
+            }
+            
             vfxOnJoining.transform.parent = null;
             vfxOnJoining.SetActive(true);
             Destroy(vfxOnJoining,2);
@@ -71,6 +82,7 @@ public class TheFollower : MonoBehaviour
 
             Destroy( gameObject); 
         }
+       
         
         if (col.gameObject.GetComponentInParent<TheObstacle>()&& !isDead)
         {

@@ -60,12 +60,16 @@ public class CrowdSystem : MonoBehaviour
 
     private void Update()
     {
-        UpdateRowPosses();
-        CalculateFirstRow();
+        if (!FinishLine.instance.returnIfCrossed())
+        {
+            UpdateRowPosses();
+            CalculateFirstRow(); 
+        }
+      
         if (rowsModified)
         {
             _reArrangeTimer -= Time.deltaTime;
-            if (_reArrangeTimer <= 0)
+            if (_reArrangeTimer <= 0 &&!FinishLine.instance.returnIfCrossed())
             {
                 rowsModified = false;
                 ReArrangeRows();
@@ -104,7 +108,7 @@ public class CrowdSystem : MonoBehaviour
 
     private void UpdateRowPosses()
     {
-        if (rows.Count == 0)
+        if (rows.Count == 0 )
             return;
 
         for (int i = _firstRowIndex+1; i < rows.Count; i++)

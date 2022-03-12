@@ -5494,8 +5494,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   myRow: {fileID: 0}
-  followSpeed: 20
-  offset: {x: 0, y: 0, z: 1.25}
+  followSpeed: 10
+  offset: {x: 0, y: 0, z: 0}
   killVfx: {fileID: 415649313102354377}
 --- !u!136 &7219818826439151837
 CapsuleCollider:

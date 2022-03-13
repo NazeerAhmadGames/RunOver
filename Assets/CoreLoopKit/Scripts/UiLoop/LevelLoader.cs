@@ -61,6 +61,6 @@ public class LevelLoader : MonoBehaviour
     
         loadingScreen.SetActive(false);
         // GameController.instance.onLevelLoad();
-      //TinySauce.OnGameStarted("Level" + PlayerPrefs.GetInt("CURRENTLEVEL"));
+      TinySauce.OnGameStarted("Level" + PlayerPrefs.GetInt("CURRENTLEVEL"));
     }
 }

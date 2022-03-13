@@ -47,7 +47,7 @@ public class CoreLoopUi : MonoBehaviour
         hudCanvas.gameObject.SetActive(false);
          LevelingSystem.instance.UpdatePlayerPRefs();
          // FlipsUiManager.instance.onCompletingLevel();
-     //TinySauce.OnGameFinished(true, 0, "Level" + PlayerPrefs.GetInt("CURRENTLEVEL"));
+     TinySauce.OnGameFinished(true, 0, "Level" + PlayerPrefs.GetInt("CURRENTLEVEL"));
         HapticManager.instance.playTheSoftHaptics();
         hudCanvas.gameObject.SetActive(false);
     }
@@ -70,8 +70,7 @@ public class CoreLoopUi : MonoBehaviour
         hudCanvas.gameObject.SetActive(false);
         HapticManager.instance.playTheSoftHaptics();
         //CustomAds.instance.showFullScreenAd();
-
-     // TinySauce.OnGameFinished(false, 0, "Level" + PlayerPrefs.GetInt("CURRENTLEVEL"));
+        TinySauce.OnGameFinished(false, 0, "Level" + PlayerPrefs.GetInt("CURRENTLEVEL"));
     }
 
 

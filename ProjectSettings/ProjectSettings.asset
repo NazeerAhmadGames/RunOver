@@ -616,10 +616,11 @@ PlayerSettings:
   webGLWasmStreaming: 0
   scriptingDefineSymbols:
     1: MOREMOUNTAINS_NICEVIBRATIONS;CROSS_PLATFORM_INPUT
-    4: MOREMOUNTAINS_NICEVIBRATIONS;CROSS_PLATFORM_INPUT;MOBILE_INPUT
+    4: VS_ATT;MOREMOUNTAINS_NICEVIBRATIONS;CROSS_PLATFORM_INPUT;MOBILE_INPUT
     7: MOREMOUNTAINS_NICEVIBRATIONS;CROSS_PLATFORM_INPUT;MOBILE_INPUT
     14: MOBILE_INPUT
-  platformArchitecture: {}
+  platformArchitecture:
+    iPhone: 2
   scriptingBackend: {}
   il2cppCompilerConfiguration: {}
   managedStrippingLevel: {}

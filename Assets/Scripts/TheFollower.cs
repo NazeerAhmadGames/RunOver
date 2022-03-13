@@ -6,7 +6,7 @@ using UnityEngine;
 public class TheFollower : MonoBehaviour
 {
     private bool hasJoined;
-    [SerializeField] private GameObject vfxOnJoining;
+    [SerializeField] private GameObject vfxOnJoining,plusOnePopUp;
     [SerializeField] private Animator myAnim;
     [SerializeField] private float distanceBeforeStartRunning=20;
     [SerializeField] private float runAwaySpeed=2;
@@ -42,9 +42,9 @@ public class TheFollower : MonoBehaviour
     IEnumerator delayedCheckForPlayer()
     {
         yield return new WaitForSeconds(.1f);
-        if (CrowdSystem.instance.transform.childCount>0 && !isrunning)
+        if (CrowdSystem.instance.firstRow!=null&& !isrunning)
         {
-            if (Vector3.Distance(transform.position,CrowdSystem.instance.transform.GetChild(0).position)<=distanceBeforeStartRunning)
+            if (Vector3.Distance(transform.position,CrowdSystem.instance.firstRow.transform.position)<=distanceBeforeStartRunning)
             {
                 if (!isrunning)
                 {
@@ -74,6 +74,12 @@ public class TheFollower : MonoBehaviour
             {
                 EndingGiant.instance.increaseGiantSize();
             }
+
+            GameObject spawnedPlusOne=Instantiate(plusOnePopUp);
+            spawnedPlusOne.transform.position = plusOnePopUp.transform.position;
+            spawnedPlusOne.SetActive(true);
+            spawnedPlusOne.transform.parent = null;
+            Destroy(spawnedPlusOne,2);
             
             vfxOnJoining.transform.parent = null;
             vfxOnJoining.SetActive(true);

@@ -10,9 +10,10 @@ public class EndingCar : MonoBehaviour
     [SerializeField] private Rigidbody rb;
     [SerializeField] private Vector3 forceVector,torqueVector;
     [SerializeField] private GameObject hitVFx;
-
+    [SerializeField] private GameObject fallSfx;
+    [SerializeField] private float velocityToPlaySfx=5;
     private int bonusAmount;
-    private bool velocityCheckCoolDown;
+    private bool velocityCheckCoolDown,landingCooledDown=true;
 
 
     public static EndingCar instance;
@@ -49,18 +50,45 @@ public class EndingCar : MonoBehaviour
             PlayerController.instance.setIfCanMove(false);
             EndingGiant.instance.playGiantKickAnimation();
             StartCoroutine(delayedKickForce());
-            SlowMotionEffect.instance.SlowMoEffect(true);
+            HapticManager.instance.playTheLightHaptics();
+
         }
         
         if (col.gameObject.GetComponent<EndingTile>())
         {
             col.gameObject.GetComponent<EndingTile>().landedOn();
+            
         }
+    }
+
+    private void OnCollisionEnter(Collision col)
+    {
+        if (col.relativeVelocity.magnitude > velocityToPlaySfx &&landingCooledDown)
+        {
+            landingCooledDown = false;
+            GameObject spawnedSfx = Instantiate(fallSfx);
+            spawnedSfx.SetActive(true);
+            Destroy(spawnedSfx,2);
+            StartCoroutine(addlandingSfxCoolDown());
+            HapticManager.instance.playTheLightHaptics();
+
+        }
+           
+    }
+
+    IEnumerator addlandingSfxCoolDown()
+    {
+        yield return new WaitForSeconds(.6f);
+        landingCooledDown = true;
     }
 
     IEnumerator delayedKickForce()
     {
-        yield return new WaitForSeconds(.6f);
+        yield return new WaitForSeconds(.2f);
+
+        SlowMotionEffect.instance.SlowMoEffect(true);
+
+        yield return new WaitForSeconds(.5f);
         hitVFx.transform.parent = null;
         hitVFx.SetActive(true);
         Destroy(hitVFx,2);

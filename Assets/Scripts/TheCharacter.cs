@@ -11,6 +11,7 @@ public class TheCharacter : MonoBehaviour
     [SerializeField] private float followSpeed=30;
     [SerializeField] private Vector3 offset;
     [SerializeField] private GameObject killVfx;
+    [SerializeField] private Animator myAnim;
     private Transform targetToFollow;
 
     private Transform giantLeader;
@@ -68,6 +69,11 @@ public class TheCharacter : MonoBehaviour
     public void setMeAsGiantLeader(bool isLeader)
     {
         isGiantLeader = isLeader;
+    }
+
+    public void playAnimation(string stateName)
+    {
+        myAnim.Play(stateName);
     }
     
 }

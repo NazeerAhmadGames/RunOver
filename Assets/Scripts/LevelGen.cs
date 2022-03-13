@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class LevelGen : MonoBehaviour
 {
-    [SerializeField] private GameObject chunk;
+    [SerializeField] private GameObject chunk,endingChunk;
 
     [SerializeField] private int noToSpawn;
     [SerializeField] private float chunkSize;
@@ -30,8 +30,15 @@ public class LevelGen : MonoBehaviour
             spawnedChunk.GetComponent<TheLevelChunk>().spawnFollowers();
 
             spawnedChunk.GetComponent<TheLevelChunk>().spawnTraps();
+            if (i==noToSpawn-1)
+            {
+                endingChunk.transform.position = new Vector3(0, 0, lastPos + spawnedChunk.GetComponent<TheLevelChunk>().returnTheSize().z);
+
+            }
 
         }
+
+       
       
     }
     // Update is called once per frame

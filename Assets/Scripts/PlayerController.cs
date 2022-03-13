@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 public class PlayerController : MonoBehaviour
@@ -12,8 +13,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private float horizontalSpeed, forwardSpeed;
     private SwerveInputSystem swerveInputSystem;
     [SerializeField] private GameObject dummyCharacter;
-
-    private bool canMove=true;
+    private bool canMove=false;
 
     private void Awake()
     {
@@ -40,6 +40,7 @@ public class PlayerController : MonoBehaviour
         {
             crowdSystem.ForwardMove(forwardSpeed); 
             crowdSystem.Swerve((swerveInputSystem.MoveFactorX * horizontalSpeed*Time.deltaTime));
+
         }
       
 
@@ -79,4 +80,18 @@ public class PlayerController : MonoBehaviour
     {
         canMove = can;
     }
+
+    public void onStartingPlaying()
+    {
+        foreach (TheCharacter c in   crowdSystem.GetComponentsInChildren<TheCharacter>())
+        {
+             c.playAnimation("Run");
+        }
+
+        canMove = true;
+
+
+    }
+
+   
 }

@@ -29,7 +29,7 @@ public class EndingChunk : MonoBehaviour
             spawnedChunk.transform.position = lastPos;
             lastPos = spawnedChunk.transform.position+new Vector3(0,0,tileSize);
             spawnedChunk.SetActive(true);
-            spawnedChunk.GetComponent<EndingTile>().updateValue(i);
+            spawnedChunk.GetComponent<EndingTile>().updateValue(i+1);
         }
     }
 

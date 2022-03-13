@@ -19,16 +19,16 @@ public class LevelProgressManager : MonoBehaviour
 
     public void UpdateTheProgress()
     {
-      // slider.value =  PlayerControl.instance.transform.position.magnitude/ FinishLine.instance.transform.position.magnitude;
+       slider.value =  CrowdSystem.instance.firstRow.transform.position.magnitude/ FinishLine.instance.transform.position.magnitude;
     }
 
     private void Update()
     {
-      /*
-        if(FlipsCounter.instance!=null)
+      
+        if(FinishLine.instance!=null)
         {
             UpdateTheProgress();
         }
-       */
+       
     }
 }

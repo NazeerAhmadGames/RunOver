@@ -38,8 +38,8 @@ public class CameraFollowCharacter : MonoBehaviour
         {
            // Vector3 newpos = new Vector3(transform.position.x, PlayerController.instance.camFollowTarget.position.y, PlayerController.instance.camFollowTarget.position.z) - offset;
             Vector3 newpos = PlayerController.instance.camFollowTarget.position- offset;
-            newpos.x = Mathf.Clamp(newpos.x, -3.5f, 3.5f);
-            newpos.x = Mathf.Lerp(transform.position.x, newpos.x, Time.deltaTime*8);
+            newpos.x = Mathf.Clamp(newpos.x, -4f, 4f);
+            newpos.x = Mathf.Lerp(transform.position.x, newpos.x, Time.deltaTime*2);
             
             if (newpos.z > targetPos.z)
                 targetPos = newpos;

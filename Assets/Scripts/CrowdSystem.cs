@@ -39,6 +39,10 @@ public class CrowdSystem : MonoBehaviour
     {
         characters.Add(character);
         GetEmptyRow().AddChar(character);
+        if (StartTheGame.instance.checkIfStarted())
+        {
+            character.playAnimation("Run");
+        }
     }
 
     public void Swerve(float movementX)

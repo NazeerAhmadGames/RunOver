@@ -9,9 +9,10 @@ public class StartTheGame : MonoBehaviour
 
    [SerializeField] private GameObject startingPanel;
 
-    void Start()
+   public static  StartTheGame instance;
+    void Awake()
     {
-        
+        instance = this;
     }
 
     void Update()
@@ -35,18 +36,23 @@ public class StartTheGame : MonoBehaviour
 
     public void hideTutorial()
     {
-        /*
-        if (!firstClick  && PlayerState.instance!=null)
+      
+        if (!firstClick  && PlayerController.instance!=null)
         {
             firstClick = true;
             startingPanel.SetActive(false);
-            PlayerState.instance.onStartingPlaying();
+            PlayerController.instance.onStartingPlaying();
         }
-        */
+       
     }
 
     public void onPlayButton()
     {
         //PlayerControl.instance.playButtonPressedNow();
+    }
+
+    public bool checkIfStarted()
+    {
+        return firstClick;
     }
 }

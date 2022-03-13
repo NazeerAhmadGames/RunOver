@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 5714796750718024331}
   - component: {fileID: 8767950810378175213}
   - component: {fileID: 5865836455523381927}
+  - component: {fileID: 337814694762960111}
   m_Layer: 0
   m_Name: hammer handle
   m_TagString: Untagged
@@ -81,6 +82,20 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+--- !u!64 &337814694762960111
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1841362563878816851}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 4
+  m_Convex: 1
+  m_CookingOptions: 30
+  m_Mesh: {fileID: -9018824653514581164, guid: 55070585155fc564db372ab142a43ca6, type: 3}
 --- !u!1 &7414245879861959697
 GameObject:
   m_ObjectHideFlags: 0

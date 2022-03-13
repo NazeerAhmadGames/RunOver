@@ -24,7 +24,7 @@ public class TheObstacle : MonoBehaviour
 
     private void Update()
     {
-        if (transform.position.z<cam.transform.position.z-20 &&!isOffScreen)
+        if (transform.position.z<cam.transform.position.z-5 &&!isOffScreen)
         {
             isOffScreen = true;
             Destroy(gameObject);

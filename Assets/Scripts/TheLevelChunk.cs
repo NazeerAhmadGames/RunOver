@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Random = System.Random;
+using  System.Linq;
 
 public class TheLevelChunk : MonoBehaviour
 {
@@ -14,7 +15,7 @@ public class TheLevelChunk : MonoBehaviour
     [SerializeField] private GameObject[] allTraps;
     [SerializeField] private bool isFirstChunk = true;
     [SerializeField] private Transform vehicleHolder;
-    [SerializeField] private int minObstacleHealth=15;
+    [SerializeField] private float minObstacleHealth=20;
 
     private int randomMaxHp;
     void OnEnable()
@@ -47,15 +48,26 @@ public class TheLevelChunk : MonoBehaviour
 
     public void spawnVehicle()
     {
+       spawnPositions= shuffle(spawnPositions);
+
         for (int i = 0; i < 3; i++)
         {
-            randomMaxHp = UnityEngine.Random.Range(minObstacleHealth, minObstacleHealth * i + 1);
+            randomMaxHp =   Mathf.FloorToInt( UnityEngine.Random.Range(minObstacleHealth, minObstacleHealth * (i+1.2f)));
             GameObject spawnedVehicle = Instantiate( returnVehicleWithIndex(i), transform);
+            
             spawnedVehicle.transform.position = vehicleHolder.transform.position+new Vector3(spawnPositions[i],0,0);
             spawnedVehicle.GetComponent<CarObstacle>().updateHp(randomMaxHp);
         }
     }
+    public  float[] shuffle (float[] items)
+    {
+        
+        Random random = new Random();
+        items = items.OrderBy(x => random.Next()).ToArray();
 
+        return items;
+        
+    }
     public GameObject returnVehicleWithIndex(int index)
     {
         for (int i = 0; i < 10000; i++)
@@ -98,19 +110,28 @@ public class TheLevelChunk : MonoBehaviour
     }
     public void spawnTraps()
     {
-        if (PlayerPrefs.GetInt("CURRENTLEVEL") < 2)
+        int obstaclePerChunk = 0;
+        if (PlayerPrefs.GetInt("CURRENTLEVEL") >= 1)
         {
-          //  return;
-            
+            obstaclePerChunk = 1;
         }
-            Vector3 randomPos = generateRandomVectorOnChunk();
+        if (PlayerPrefs.GetInt("CURRENTLEVEL") >= 4)
+        {
+            obstaclePerChunk = 2;
+        }
+       
+      
+        for (int i = 0; i < obstaclePerChunk; i++)
+        {
+            Vector3 randomPos = generateRandomVectorForObstacle();
 
-
-                if (isFeasiblePosition(randomPos))
-                {
-                    GameObject spawnedTrap = Instantiate(allTraps[UnityEngine.Random.Range(0,allTraps.Length)], transform);
-                    spawnedTrap.transform.position = randomPos;
-                }
+            if (isFeasiblePosition(randomPos))
+            {
+                GameObject spawnedTrap = Instantiate(allTraps[UnityEngine.Random.Range(0,allTraps.Length)], transform);
+                spawnedTrap.transform.position = randomPos;
+            } 
+        }
+          
        
     }
 
@@ -127,7 +148,12 @@ public class TheLevelChunk : MonoBehaviour
     public Vector3 generateRandomVectorOnChunk()
     {
         return new Vector3(UnityEngine.Random.Range(-chunkSize.x/2, chunkSize.x/2),
-            0.61f, UnityEngine.Random.Range(transform.position.z+10,transform.position.z+ chunkSize.z-30));
+            0.61f, UnityEngine.Random.Range(transform.position.z+10,transform.position.z+ chunkSize.z-50));
+    }
+    public Vector3 generateRandomVectorForObstacle()
+    {
+        return new Vector3(UnityEngine.Random.Range(-chunkSize.x/2, chunkSize.x/2),
+            0.61f, UnityEngine.Random.Range(transform.position.z+20,transform.position.z+ chunkSize.z-70));
     }
     public Vector3 generateRandomVectorInGroup(Vector3 lastFollower,float offset=5)
     {

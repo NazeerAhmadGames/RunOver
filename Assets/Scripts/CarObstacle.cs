@@ -39,7 +39,7 @@ public class CarObstacle : MonoBehaviour
                 rb.transform.DOScale(Vector3.one / 10, .6f).SetDelay(1.5f);
         }
         onDeath.Invoke();
-        Destroy(shatteredObject,3);
+        Destroy(shatteredObject,4);
         HapticManager.instance.playTheLightHaptics();
 
         Destroy(gameObject);

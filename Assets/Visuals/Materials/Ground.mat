@@ -81,7 +81,7 @@ Material:
     - _ZWrite: 1
     - __dummy__: 0
     m_Colors:
-    - _Color: {r: 0.93333334, g: 0.83210206, b: 0.7372549, a: 1}
+    - _Color: {r: 0.94509804, g: 0.92971087, b: 0.76862746, a: 1}
     - _CurvedWorldBendSettings: {r: 2, g: 1, b: 0, a: 0}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
     - _HColor: {r: 1, g: 1, b: 1, a: 1}

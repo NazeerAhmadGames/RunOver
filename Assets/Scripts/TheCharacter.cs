@@ -27,6 +27,8 @@ public class TheCharacter : MonoBehaviour
             killVfx.transform.parent = null;
             killVfx.SetActive(true);
             Destroy(killVfx,2);
+            HapticManager.instance.playTheLightHaptics();
+
             Destroy(gameObject);
         }
     }

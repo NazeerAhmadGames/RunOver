@@ -14,6 +14,15 @@ public class LevelGen : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+       
+         if (PlayerPrefs.GetInt("CURRENTLEVEL")>=3)
+        {
+            noToSpawn = 2;
+        }
+        else
+        {
+            noToSpawn = 1;
+        }
       spawnNow();
     }
 

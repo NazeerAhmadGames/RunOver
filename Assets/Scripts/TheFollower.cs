@@ -42,7 +42,7 @@ public class TheFollower : MonoBehaviour
     IEnumerator delayedCheckForPlayer()
     {
         yield return new WaitForSeconds(.1f);
-        if (CrowdSystem.instance.firstRow!=null&& !isrunning)
+        if (CrowdSystem.instance.firstRow!=null&& !isrunning&& StartTheGame.instance.checkIfStarted())
         {
             if (Vector3.Distance(transform.position,CrowdSystem.instance.firstRow.transform.position)<=distanceBeforeStartRunning)
             {

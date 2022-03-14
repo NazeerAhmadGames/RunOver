@@ -14,11 +14,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   gameAnalyticsIosGameKey: d99043c7b0eab9e8306a4cc961221083
   gameAnalyticsIosSecretKey: 3ddb613ed4dcb4af6e64417653fe7db0f39c4f30
-  gameAnalyticsAndroidGameKey: 
-  gameAnalyticsAndroidSecretKey: 
+  gameAnalyticsAndroidGameKey: 4ca62797b42ca2f8ab21dabc04814060
+  gameAnalyticsAndroidSecretKey: 9273a0d96e146ccad491c9d956715fe097939c6e
   facebookAppId: 208311684839722
   adjustIOSToken: 4hi72ygsbn28
-  adjustAndroidToken: 
+  adjustAndroidToken: 208311684839722
   EditorIdfa: 9bea4afa-62bd-4ed2-a800-01c514a94730
   UseRemoteConfig: 0
   UseVoodooAnalytics: 1
